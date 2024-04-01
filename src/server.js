@@ -7,6 +7,7 @@ import { routes } from "./routes.js";
 
 // Query Parameters: URL Stateful ====> /users?name=Lucas&age=25
 // Route Parameters: Identificação de recurso ====> /users/:id
+// Request body: envio de informações de um formulário (HTTPs)
 
 // Cabeçalhos (Requisição/resposta) => Metadados
 // Informational responses (100 – 199)
