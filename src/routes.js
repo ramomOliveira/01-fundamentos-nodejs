@@ -1,8 +1,8 @@
-import { randomUUID } from 'node:crypto';
+import { randomUUID } from "node:crypto";
 import { Database } from "./database.js";
-import { buildRoutePath } from './utils/build-route-path.js';
+import { buildRoutePath } from "./utils/build-route-path.js";
 
-const database = new Database()
+const database = new Database();
 
 export const routes = [
   {
@@ -32,14 +32,29 @@ export const routes = [
     },
   },
   {
-    method: 'DELETE',
-    path: buildRoutePath('/users/:id'),
+    method: "PUT",
+    path: buildRoutePath("/users/:id"),
     handler: (req, res) => {
-      const { id } = req.params
+      const { id } = req.params;
+      const { name, email } = req.body;
 
-      database.delete('users', id)
+      database.update("users", id, {
+        name,
+        email,
+      });
 
-      return res.writeHead(204).end()
-    }
-  }
+      return res.writeHead(204).end();
+    },
+  },
+  {
+    method: "DELETE",
+    path: buildRoutePath("/users/:id"),
+    handler: (req, res) => {
+      const { id } = req.params;
+
+      database.delete("users", id);
+
+      return res.writeHead(204).end();
+    },
+  },
 ];
