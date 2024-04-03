@@ -19,8 +19,21 @@ export class Database {
     fs.writeFile(databasePath, JSON.stringify(this.#database));
   }
 
-  select(table) {
-    const data = this.#database[table] ?? [];
+  // { name: "Ramom", email: "ramom@ramom" }
+  // o Object.entries vai transformar o objeto em um array de arrays
+  // [["name", "Ramom"], ["email", "ramom@ramom"]]
+
+  select(table, search) {
+    let data = this.#database[table] ?? [];
+
+    if (search) {
+      data = data.filter(row => {
+        return Object.entries(search).some(([key, value]) => {
+          return row[key].toLowerCase().includes(value.toLowerCase())
+        })
+
+      })
+    }
     return data;
   }
 
